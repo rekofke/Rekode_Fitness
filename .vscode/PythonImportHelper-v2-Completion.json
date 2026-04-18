@@ -1,0 +1,386 @@
+[
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "JWTManager",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Marshmallow",
+        "importPath": "flask_marshmallow",
+        "description": "flask_marshmallow",
+        "isExtraImport": true,
+        "detail": "flask_marshmallow",
+        "documentation": {}
+    },
+    {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "register",
+        "kind": 2,
+        "importPath": "backend.app.blueprints.auth",
+        "description": "backend.app.blueprints.auth",
+        "peekOfCode": "def register():\n    data = request.get_json()\n    if User.query.filter_by(email=data['email']).first():\n        return jsonify({'message': 'Email already exists'}), 409\n    hashed_pw = generate_password_hash(data['password'])\n    user = User(email=data['email'], password_hash=hashed_pw, role=data.get('role', 'client'))\n    db.session.add(user)\n    db.session.commit()\n    return jsonify(UserSchema().dump(user)), 201\n@auth_bp.route('/login', methods = ['POST'])",
+        "detail": "backend.app.blueprints.auth",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "backend.app.blueprints.auth",
+        "description": "backend.app.blueprints.auth",
+        "peekOfCode": "def login():\n    data = request.get_json()\n    user = User.query.filter_by(email=data['email']).first()\n    if user and check_password_hash(user.password_hash, data['password']):\n        token = create_access_token(identity=user.id)\n        return jsonify(access_token=token), 200\n    return jsonify({'message' : 'Invalid credentials'}), 401",
+        "detail": "backend.app.blueprints.auth",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "backend.app.blueprints.auth",
+        "description": "backend.app.blueprints.auth",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')\n@auth_bp.route('/register', methods = ['POST'])\ndef register():\n    data = request.get_json()\n    if User.query.filter_by(email=data['email']).first():\n        return jsonify({'message': 'Email already exists'}), 409\n    hashed_pw = generate_password_hash(data['password'])\n    user = User(email=data['email'], password_hash=hashed_pw, role=data.get('role', 'client'))\n    db.session.add(user)\n    db.session.commit()",
+        "detail": "backend.app.blueprints.auth",
+        "documentation": {}
+    },
+    {
+        "label": "get_bookings",
+        "kind": 2,
+        "importPath": "backend.app.blueprints.bookings",
+        "description": "backend.app.blueprints.bookings",
+        "peekOfCode": "def get_bookings():\n    \"\"\" Get all bookings (admin) or user's\" own bookings \"\"\"\n    user_id = get_jwt_identity()",
+        "detail": "backend.app.blueprints.bookings",
+        "documentation": {}
+    },
+    {
+        "label": "bookings_bp",
+        "kind": 5,
+        "importPath": "backend.app.blueprints.bookings",
+        "description": "backend.app.blueprints.bookings",
+        "peekOfCode": "bookings_bp = Blueprint('bookings', __name__, url_prefix='/api/bookings')\n@bookings_bp.route('/', methods=['GET'])\n@jwt_required()\ndef get_bookings():\n    \"\"\" Get all bookings (admin) or user's\" own bookings \"\"\"\n    user_id = get_jwt_identity()",
+        "detail": "backend.app.blueprints.bookings",
+        "documentation": {}
+    },
+    {
+        "label": "get_classes",
+        "kind": 2,
+        "importPath": "backend.app.blueprints.classes",
+        "description": "backend.app.blueprints.classes",
+        "peekOfCode": "def get_classes():\n    classes = Class.query.all()\n    return ClassSchema(many=True).jsonify(classes)\n@classes_bp.route('/', methods=['POST'])\n@jwt_required()\ndef create_class():\n    # Only trainers or admins can create classes\n    user_id = get_jwt_identity()\n    trainer = Trainer.query.filter_by(user_id=user_id).first()\n    if not trainer:",
+        "detail": "backend.app.blueprints.classes",
+        "documentation": {}
+    },
+    {
+        "label": "create_class",
+        "kind": 2,
+        "importPath": "backend.app.blueprints.classes",
+        "description": "backend.app.blueprints.classes",
+        "peekOfCode": "def create_class():\n    # Only trainers or admins can create classes\n    user_id = get_jwt_identity()\n    trainer = Trainer.query.filter_by(user_id=user_id).first()\n    if not trainer:\n        return jsonify({'msg': 'Only trainers can create classes'}), 403\n        data = request.get_json()\n        new_class = Class(name=data['name'], description=data.get('description'), \n                          trainer_id = trainer.id, capacity=data.get('capacity', 10),\n                          start_time=data['start_time'], end_tirm=data['end_time'])",
+        "detail": "backend.app.blueprints.classes",
+        "documentation": {}
+    },
+    {
+        "label": "classes_bp",
+        "kind": 5,
+        "importPath": "backend.app.blueprints.classes",
+        "description": "backend.app.blueprints.classes",
+        "peekOfCode": "classes_bp = Blueprint('classes', __name__, url_prefix='/api/classes')\n@classes_bp.route('/', methods=['GET'])\ndef get_classes():\n    classes = Class.query.all()\n    return ClassSchema(many=True).jsonify(classes)\n@classes_bp.route('/', methods=['POST'])\n@jwt_required()\ndef create_class():\n    # Only trainers or admins can create classes\n    user_id = get_jwt_identity()",
+        "detail": "backend.app.blueprints.classes",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "backend.app.config",
+        "description": "backend.app.config",
+        "peekOfCode": "class Config:\n    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///fitness.db' \n    SQLALCHEMY_TRACK_MODIFICATIONS = False\n    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'jwt-secret')",
+        "detail": "backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "backend.app.extensions",
+        "description": "backend.app.extensions",
+        "peekOfCode": "db = SQLAlchemy()\nma = Marshmallow()\njwt = JWTManager()\ncors = CORS()",
+        "detail": "backend.app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "ma",
+        "kind": 5,
+        "importPath": "backend.app.extensions",
+        "description": "backend.app.extensions",
+        "peekOfCode": "ma = Marshmallow()\njwt = JWTManager()\ncors = CORS()",
+        "detail": "backend.app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "kind": 5,
+        "importPath": "backend.app.extensions",
+        "description": "backend.app.extensions",
+        "peekOfCode": "jwt = JWTManager()\ncors = CORS()",
+        "detail": "backend.app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "cors",
+        "kind": 5,
+        "importPath": "backend.app.extensions",
+        "description": "backend.app.extensions",
+        "peekOfCode": "cors = CORS()",
+        "detail": "backend.app.extensions",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "class User(db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key = True)\n    email= db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(256), nullable=False)\n    role = db.Column(db.String(20), nullable=False) # 'client', 'trainer', 'admin\n    created_at = db.Column(db.DateTime, default=datetime.utcnow)\n    # Relationships\n    client_profile = db.relationship('Client', backref='user', uselist=False)\n    trainer_profile = db.relationship('Trainer', backref='user', uselist=False)",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Client",
+        "kind": 6,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "class Client(db.Model):\n    __tablename__ = 'clients'\n    id = db.Column(db.Integer, primary_key=True)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))\n    first_name = db.Column(db.String(50))\n    last_name = db.Column(db.String(50))\n    phone = db.Column(db.String(20))\n    membership_type = db.Column(db.String(20)) # 'basic', 'premium'\n    bookings = db.relationship('Booking', backref='client', lazy=True)\nclass Trainer(db.Model):",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Trainer",
+        "kind": 6,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "class Trainer(db.Model):\n    __tablename__ - 'trainers'\n    id = db.Column(db.Integer, primary_key=True)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))\n    first_name = db.Column(db.String(50))\n    last_name = db.Column(db.String(50))\n    bio = db.Column(db.Text)\n    specialty = db.Column(db.String(100))\n    classes = db.relationship('Class', backref='trainer', lazy=True)\nclass Class(db.Model):",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Class",
+        "kind": 6,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "class Class(db.Model):\n    __tablename__ = 'classes'\n    id - db.Column(db.Integer, primary_key = True)\n    name = db.Column(db.String(100), nullable = False)\n    description = db.Column(db.Text)\n    trainer_id = db.Column(db.Integer, db.ForeignKey('trainers.id'))\n    capacty = db.Column(db.Integer)\n    start_time = db.Column(db.DateTime)\n    end_time = db.Column(db.DateTime)\n    bookings = db.relationship('Booking', backref='class', lazy=True)",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Booking",
+        "kind": 6,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "class Booking(db.Model):\n    __tablename__ = 'bookings'\n    id = db.Column(db.Integer, primary_key=True)\n    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))\n    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))\n    booked_at = db.Column(db.DateTime, default=datetime.ucnow)\n    status = db.Column(db.String(20), default='confirmed') # 'confirmed', 'cancelled'",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "UserSchema",
+        "kind": 6,
+        "importPath": "backend.app.schemas",
+        "description": "backend.app.schemas",
+        "peekOfCode": "class UserSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = User\n        load_instance = True\n        exclude = ('password_hash')\nclass ClientSchena(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Client\n        load_instance = True\nclass TrainerSchema(ma.SQLAlchemyAutoSchema):",
+        "detail": "backend.app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ClientSchena",
+        "kind": 6,
+        "importPath": "backend.app.schemas",
+        "description": "backend.app.schemas",
+        "peekOfCode": "class ClientSchena(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Client\n        load_instance = True\nclass TrainerSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Trainer\n        load_instance = True\nclass ClassSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:",
+        "detail": "backend.app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TrainerSchema",
+        "kind": 6,
+        "importPath": "backend.app.schemas",
+        "description": "backend.app.schemas",
+        "peekOfCode": "class TrainerSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Trainer\n        load_instance = True\nclass ClassSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Class\n        load_instance = True\nclass BookingSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:",
+        "detail": "backend.app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ClassSchema",
+        "kind": 6,
+        "importPath": "backend.app.schemas",
+        "description": "backend.app.schemas",
+        "peekOfCode": "class ClassSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Class\n        load_instance = True\nclass BookingSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Booking\n        load_instance = True",
+        "detail": "backend.app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookingSchema",
+        "kind": 6,
+        "importPath": "backend.app.schemas",
+        "description": "backend.app.schemas",
+        "peekOfCode": "class BookingSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Booking\n        load_instance = True",
+        "detail": "backend.app.schemas",
+        "documentation": {}
+    }
+]
