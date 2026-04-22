@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "mock-api": "json-server --watch db.json --port 4000"
+  }
+}
