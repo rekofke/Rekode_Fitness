@@ -6,7 +6,7 @@ export default function ClassCalander() {
     const [classes, setClasses] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date(). toISOString().split('T')[0]);
     const [selectedClass, setSelectedClass] = useState(null);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     useEffect(() => {
         loadClasses();
@@ -23,7 +23,10 @@ export default function ClassCalander() {
 
     return (
         <div className="calandar-container">
-            <h2>Rekode Fitness Classes</h2>
+            <h1>Welcome to Rekode Fitness</h1>
+            <button onClick={logout}>Logout</button>
+            <p>Class calendar will apprea here soon</p>
+
             <input
             type="date"
             value={selectedDate}
