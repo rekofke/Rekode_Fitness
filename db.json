@@ -1,47 +1,58 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "email": "member@rekode.com",
-            "password": "pass123",
-            "role":"member",
-            "name": "Alex Member"
-        },
-        {
-            "id": 2,
-            "email": "trainer@rekode.com",
-            "password": "pass123",
-            "role": "trainer",
-            "name": "Jordan Trainer"
-        }
-    ],
-    "classes": [
-        {
-            "id": 1, 
-            "name": "HITIT Burn",
-            "trainer": "Jordan",
-            "date": "2026-04-22",
-            "startTime": "08:00",
-            "endTime": "09:00",
-            "capacity": 15,
-            "bookedCount": 12
-        },
-        {
-            "id": 3,
-            "name": "Strength Foundations",
-            "trainer": "Jordan",
-            "date":"2026-04-23",
-            "startTime": "17:30",
-            "endTime": "18:30",
-            "capacity": 12,
-            "bookedCount": 5
-        }
-    ],
-    "bookings": [
-        {
-            "id": 1,
-            "userId": 1,
-            "bookingDate": "2026-04-20"
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "email": "member@rekode.com",
+      "password": "pass123",
+      "role": "member",
+      "name": "Alex Member"
+    },
+    {
+      "id": 2,
+      "email": "trainer@rekode.com",
+      "password": "pass123",
+      "role": "trainer",
+      "name": "Jordan Trainer"
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "HIIT Burn",
+      "trainer": "Jordan",
+      "date": "2026-05-01",
+      "startTime": "08:00",
+      "endTime": "09:00",
+      "capacity": 15,
+      "bookedCount": 8
+    },
+    {
+      "id": 2,
+      "name": "Yoga Flow",
+      "trainer": "Sam",
+      "date": "2026-05-01",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "capacity": 20,
+      "bookedCount": 12
+    },
+    {
+      "id": 3,
+      "name": "Strength Foundations",
+      "trainer": "Jordan",
+      "date": "2026-05-02",
+      "startTime": "17:30",
+      "endTime": "18:30",
+      "capacity": 12,
+      "bookedCount": 5
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "userId": 1,
+      "classId": 1,
+      "bookingDate": "2026-04-20"
+    }
+  ]
 }
