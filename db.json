@@ -20,7 +20,7 @@
       "id": 1,
       "name": "HIIT Burn",
       "trainer": "Jordan",
-      "date": "2026-05-01",
+      "date": "2026-05-03",
       "startTime": "08:00",
       "endTime": "09:00",
       "capacity": 15,
@@ -30,7 +30,7 @@
       "id": 2,
       "name": "Yoga Flow",
       "trainer": "Sam",
-      "date": "2026-05-01",
+      "date": "2026-05-03",
       "startTime": "10:00",
       "endTime": "11:00",
       "capacity": 20,
@@ -40,7 +40,7 @@
       "id": 3,
       "name": "Strength Foundations",
       "trainer": "Jordan",
-      "date": "2026-05-02",
+      "date": "2026-05-04",
       "startTime": "17:30",
       "endTime": "18:30",
       "capacity": 12,
@@ -52,7 +52,7 @@
       "id": 1,
       "userId": 1,
       "classId": 1,
-      "bookingDate": "2026-04-20"
+      "bookingDate": "2026-05-20"
     }
   ]
 }
