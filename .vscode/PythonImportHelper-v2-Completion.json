@@ -353,6 +353,14 @@
         "documentation": {}
     },
     {
+        "label": "create_app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "register",
         "kind": 2,
         "importPath": "backend.app.blueprints.auth",
@@ -620,6 +628,15 @@
         "description": "backend.app.schemas",
         "peekOfCode": "class BookingSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = Booking\n        load_instance = True",
         "detail": "backend.app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.run",
+        "description": "backend.run",
+        "peekOfCode": "app = create_app()\nif __name__ == '__main__':\n    app.run(debut=True, port=5000)",
+        "detail": "backend.run",
         "documentation": {}
     }
 ]
