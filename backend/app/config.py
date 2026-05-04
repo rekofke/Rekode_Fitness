@@ -1,7 +1,10 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///fitness.db' 
+    SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-secret')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///rekode.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'jwt-secret')
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-jwt-secret')

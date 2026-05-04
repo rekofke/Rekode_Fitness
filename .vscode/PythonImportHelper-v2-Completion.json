@@ -72,6 +72,30 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "create_access_token",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -89,6 +113,30 @@
     },
     {
         "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
         "isExtraImport": true,
@@ -136,12 +184,52 @@
         "documentation": {}
     },
     {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "os",
         "description": "os",
         "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
         "documentation": {}
     },
     {
@@ -166,6 +254,14 @@
         "description": "flask_cors",
         "isExtraImport": true,
         "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -249,11 +345,29 @@
         "documentation": {}
     },
     {
+        "label": "register",
+        "kind": 2,
+        "importPath": "backend.app.auth",
+        "description": "backend.app.auth",
+        "peekOfCode": "def register():\n    data = request.json\n    if User.query.filter_by(email=data['email']).first():\n        return jsonify({'error': 'Email already exists'}), 400\n    hashed = generate_password_hash(data['password'])\n    user = User(\n        email=data['email'],\n        password=hashed,\n        name=data['name'],\n        role=data.get('role', 'member')",
+        "detail": "backend.app.auth",
+        "documentation": {}
+    },
+    {
+        "label": "auth_bp",
+        "kind": 5,
+        "importPath": "backend.app.auth",
+        "description": "backend.app.auth",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n@auth_bp.route('/register', methods=['PSOT'])\ndef register():\n    data = request.json\n    if User.query.filter_by(email=data['email']).first():\n        return jsonify({'error': 'Email already exists'}), 400\n    hashed = generate_password_hash(data['password'])\n    user = User(\n        email=data['email'],\n        password=hashed,",
+        "detail": "backend.app.auth",
+        "documentation": {}
+    },
+    {
         "label": "Config",
         "kind": 6,
         "importPath": "backend.app.config",
         "description": "backend.app.config",
-        "peekOfCode": "class Config:\n    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///fitness.db' \n    SQLALCHEMY_TRACK_MODIFICATIONS = False\n    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'jwt-secret')",
+        "peekOfCode": "class Config:\n    SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-secret')\n    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///rekode.db')\n    SQLALCHEMY_TRACK_MODIFICATIONS = False\n    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-jwt-secret')",
         "detail": "backend.app.config",
         "documentation": {}
     },
@@ -298,25 +412,7 @@
         "kind": 6,
         "importPath": "backend.app.models",
         "description": "backend.app.models",
-        "peekOfCode": "class User(db.Model):\n    __tablename__ = 'users'\n    id = db.Column(db.Integer, primary_key = True)\n    email= db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(256), nullable=False)\n    role = db.Column(db.String(20), nullable=False) # 'client', 'trainer', 'admin\n    created_at = db.Column(db.DateTime, default=datetime.utcnow)\n    # Relationships\n    client_profile = db.relationship('Client', backref='user', uselist=False)\n    trainer_profile = db.relationship('Trainer', backref='user', uselist=False)",
-        "detail": "backend.app.models",
-        "documentation": {}
-    },
-    {
-        "label": "Client",
-        "kind": 6,
-        "importPath": "backend.app.models",
-        "description": "backend.app.models",
-        "peekOfCode": "class Client(db.Model):\n    __tablename__ = 'clients'\n    id = db.Column(db.Integer, primary_key=True)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))\n    first_name = db.Column(db.String(50))\n    last_name = db.Column(db.String(50))\n    phone = db.Column(db.String(20))\n    membership_type = db.Column(db.String(20)) # 'basic', 'premium'\n    bookings = db.relationship('Booking', backref='client', lazy=True)\nclass Trainer(db.Model):",
-        "detail": "backend.app.models",
-        "documentation": {}
-    },
-    {
-        "label": "Trainer",
-        "kind": 6,
-        "importPath": "backend.app.models",
-        "description": "backend.app.models",
-        "peekOfCode": "class Trainer(db.Model):\n    __tablename__ - 'trainers'\n    id = db.Column(db.Integer, primary_key=True)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))\n    first_name = db.Column(db.String(50))\n    last_name = db.Column(db.String(50))\n    bio = db.Column(db.Text)\n    specialty = db.Column(db.String(100))\n    classes = db.relationship('Class', backref='trainer', lazy=True)\nclass Class(db.Model):",
+        "peekOfCode": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    name = db.Column(db.String(100), nullable=False)\n    role = db.Column(db.String(20), default='member')  # 'member' or 'trainer'\n    bookings = db.relationship('Booking', backref='user', lazy=True)\nclass Class(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    name = db.Column(db.String(100), nullable=False)",
         "detail": "backend.app.models",
         "documentation": {}
     },
@@ -325,7 +421,7 @@
         "kind": 6,
         "importPath": "backend.app.models",
         "description": "backend.app.models",
-        "peekOfCode": "class Class(db.Model):\n    __tablename__ = 'classes'\n    id - db.Column(db.Integer, primary_key = True)\n    name = db.Column(db.String(100), nullable = False)\n    description = db.Column(db.Text)\n    trainer_id = db.Column(db.Integer, db.ForeignKey('trainers.id'))\n    capacty = db.Column(db.Integer)\n    start_time = db.Column(db.DateTime)\n    end_time = db.Column(db.DateTime)\n    bookings = db.relationship('Booking', backref='class', lazy=True)",
+        "peekOfCode": "class Class(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    name = db.Column(db.String(100), nullable=False)\n    trainer = db.Column(db.String(100), nullable=False)\n    date = db.Column(db.Date, nullable=False)\n    start_time = db.Column(db.String(10), nullable=False)  # \"08:00\"\n    end_time = db.Column(db.String(10), nullable=False)\n    capacity = db.Column(db.Integer, default=15)\n    # booked_count will be calculated via relationship\n    bookings = db.relationship('Booking', backref='class_obj', lazy=True)",
         "detail": "backend.app.models",
         "documentation": {}
     },
@@ -334,7 +430,16 @@
         "kind": 6,
         "importPath": "backend.app.models",
         "description": "backend.app.models",
-        "peekOfCode": "class Booking(db.Model):\n    __tablename__ = 'bookings'\n    id = db.Column(db.Integer, primary_key=True)\n    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))\n    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))\n    booked_at = db.Column(db.DateTime, default=datetime.ucnow)\n    status = db.Column(db.String(20), default='confirmed') # 'confirmed', 'cancelled'",
+        "peekOfCode": "class Booking(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)\n    class_id = db.Column(db.Integer, db.ForeignKey('class.id'), nullable=False)\n    booking_date = db.Column(db.Date, default=datetime.utcnow)\n# Commented out for now will use different database structure and auth system, but keeping here for reference\n# \n# class User(db.Model):\n#     __tablename__ = 'users'\n#     id = db.Column(db.Integer, primary_key = True)",
+        "detail": "backend.app.models",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "backend.app.models",
+        "description": "backend.app.models",
+        "peekOfCode": "db = SQLAlchemy()\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    name = db.Column(db.String(100), nullable=False)\n    role = db.Column(db.String(20), default='member')  # 'member' or 'trainer'\n    bookings = db.relationship('Booking', backref='user', lazy=True)\nclass Class(db.Model):\n    id = db.Column(db.Integer, primary_key=True)",
         "detail": "backend.app.models",
         "documentation": {}
     },
